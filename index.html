@@ -29,14 +29,12 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--dark); min-height: 100vh; }
 
-  /* ── LAYOUT ── */
   .shell { display: flex; min-height: 100vh; }
   .sidebar { width: 220px; background: var(--dark); min-height: 100vh; flex-shrink: 0; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; }
   .main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; }
   .topbar { background: var(--white); border-bottom: 1px solid var(--line); padding: 0 28px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
   .content { padding: 28px; flex: 1; }
 
-  /* ── SIDEBAR ── */
   .brand { padding: 20px 20px 16px; border-bottom: 1px solid #333; }
   .brand-name { font-size: 15px; font-weight: 600; color: var(--white); letter-spacing: .02em; }
   .brand-sub { font-size: 10px; color: #888; letter-spacing: .08em; text-transform: uppercase; margin-top: 2px; }
@@ -49,7 +47,6 @@
   .nav-item.active .nav-badge { background: rgba(255,255,255,.25); }
   .nav-section { font-size: 9px; color: #555; text-transform: uppercase; letter-spacing: .1em; padding: 12px 12px 4px; }
 
-  /* ── TOPBAR ── */
   .page-title { font-size: 15px; font-weight: 500; color: var(--dark); }
   .topbar-right { display: flex; align-items: center; gap: 12px; }
   .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .15s; border: none; font-family: inherit; }
@@ -58,10 +55,7 @@
   .btn-ghost { background: transparent; color: var(--mid); border: 1px solid var(--line); }
   .btn-ghost:hover { background: var(--bg); }
   .btn-sm { padding: 5px 12px; font-size: 12px; border-radius: 6px; }
-  .btn-danger { background: var(--red-bg); color: var(--red); border: 1px solid #f5c0c0; }
-  .btn-danger:hover { background: #f8d5d5; }
 
-  /* ── STATS ── */
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
   .stat { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
   .stat-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
@@ -70,9 +64,13 @@
   .stat.orange { border-top: 3px solid var(--orange); }
   .stat.green { border-top: 3px solid var(--green); }
   .stat.amber { border-top: 3px solid var(--amber); }
-  .stat.red { border-top: 3px solid var(--red); }
+  .stat.blue { border-top: 3px solid var(--blue); }
 
-  /* ── TABLE ── */
+  /* Loading bar */
+  .loading-bar { display: none; height: 3px; background: var(--line); position: fixed; top: 0; left: 0; right: 0; z-index: 999; overflow: hidden; }
+  .loading-bar::after { content: ''; position: absolute; left: -40%; width: 40%; height: 100%; background: var(--orange); animation: loading 1s linear infinite; }
+  @keyframes loading { to { left: 140%; } }
+
   .card { background: var(--white); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
   .card-header { padding: 16px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .card-title { font-size: 13px; font-weight: 600; color: var(--dark); }
@@ -87,16 +85,15 @@
   td { padding: 12px 16px; font-size: 13px; color: var(--dark); vertical-align: middle; }
   .mono { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--gray); }
 
-  /* ── BADGES ── */
   .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
   .badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .7; }
   .badge-green { background: var(--green-bg); color: var(--green); }
   .badge-amber { background: var(--amber-bg); color: var(--amber); }
   .badge-red { background: var(--red-bg); color: var(--red); }
   .badge-blue { background: var(--blue-bg); color: var(--blue); }
+  .badge-orange { background: var(--orange-light); color: var(--orange-dark); }
   .badge-gray { background: #f0f0f0; color: var(--gray); }
 
-  /* ── MODAL ── */
   .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 100; align-items: flex-start; justify-content: center; padding-top: 60px; }
   .overlay.open { display: flex; }
   .modal { background: var(--white); border-radius: 14px; width: 680px; max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,.2); animation: mIn .2s ease; }
@@ -108,7 +105,6 @@
   .modal-body { padding: 20px 24px; }
   .modal-footer { padding: 16px 24px; border-top: 1px solid var(--line); display: flex; gap: 10px; justify-content: flex-end; }
 
-  /* ── FORMS ── */
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .form-group { display: flex; flex-direction: column; gap: 5px; }
   .form-group.full { grid-column: 1 / -1; }
@@ -117,7 +113,6 @@
   input:focus, select:focus, textarea:focus { border-color: var(--orange); }
   textarea { resize: vertical; min-height: 70px; }
 
-  /* ── ÇEKİ LİSTESİ ── */
   .ceki-section { margin-top: 16px; }
   .ceki-title { font-size: 12px; font-weight: 600; color: var(--mid); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
   .ceki-table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 12px; }
@@ -131,7 +126,6 @@
   .progress-bar { height: 6px; background: var(--line); border-radius: 4px; overflow: hidden; margin-top: 6px; }
   .progress-fill { height: 100%; background: var(--orange); border-radius: 4px; transition: width .3s; }
 
-  /* ── DETAY PANELİ ── */
   .detail-overlay { display: none; position: fixed; inset: 0; z-index: 90; }
   .detail-overlay.open { display: block; }
   .detail-panel { position: fixed; right: 0; top: 0; bottom: 0; width: 420px; background: var(--white); border-left: 1px solid var(--line); overflow-y: auto; z-index: 91; box-shadow: -8px 0 30px rgba(0,0,0,.08); animation: pIn .2s ease; }
@@ -153,23 +147,24 @@
   .ceki-name { flex: 1; }
   .ceki-qty { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--gray); }
 
-  /* ── EMPTY ── */
   .empty { text-align: center; padding: 48px 20px; color: var(--gray); font-size: 13px; }
   .empty-icon { font-size: 32px; margin-bottom: 8px; opacity: .4; }
 
-  /* ── TOAST ── */
   .toast { position: fixed; bottom: 24px; right: 24px; background: var(--dark); color: white; padding: 10px 18px; border-radius: 10px; font-size: 13px; z-index: 999; animation: tIn .3s ease; display: none; }
   .toast.show { display: block; }
   @keyframes tIn { from { opacity:0; transform:translateY(10px); } }
 
-  /* ── DURUM TOGGLE ── */
   .status-select { border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; font-size: 12px; font-family: inherit; cursor: pointer; background: var(--white); color: var(--dark); outline: none; }
+
+  .sync-btn { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--gray); background: none; border: 1px solid var(--line); border-radius: 6px; padding: 5px 10px; cursor: pointer; font-family: inherit; }
+  .sync-btn:hover { background: var(--bg); color: var(--dark); }
 </style>
 </head>
 <body>
 
+<div class="loading-bar" id="loading-bar"></div>
+
 <div class="shell">
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="brand">
       <div class="brand-name">ENORPA</div>
@@ -199,11 +194,14 @@
     </nav>
   </aside>
 
-  <!-- MAIN -->
   <div class="main">
     <div class="topbar">
       <span class="page-title" id="page-title">Tüm Sevkiyatlar</span>
       <div class="topbar-right">
+        <button class="sync-btn" onclick="loadData()">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 8a7 7 0 0 1 13-3.5M15 8a7 7 0 0 1-13 3.5"/><path d="M12 1v4h-4M4 15v-4h4"/></svg>
+          Yenile
+        </button>
         <div class="search-box">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#aaa" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>
           <input type="text" placeholder="Ara..." id="search-input" oninput="renderTable()">
@@ -216,28 +214,21 @@
     </div>
 
     <div class="content">
-
-      <!-- STATS -->
       <div class="stats" id="stats-area"></div>
-
-      <!-- TABLE CARD -->
       <div class="card" id="main-card">
         <div class="card-header">
           <span class="card-title" id="table-title">Tüm Sevkiyatlar</span>
-          <div style="display:flex;gap:8px;align-items:center">
-            <select id="filter-durum" class="status-select" style="width:140px" onchange="renderTable()">
-              <option value="">Tüm Durumlar</option>
-              <option value="Bekliyor">Bekliyor</option>
-              <option value="Hazırlanıyor">Hazırlanıyor</option>
-              <option value="Sevk Edildi">Sevk Edildi</option>
-              <option value="Tamamlandı">Tamamlandı</option>
-              <option value="İptal">İptal</option>
-            </select>
-          </div>
+          <select id="filter-durum" class="status-select" style="width:140px" onchange="renderTable()">
+            <option value="">Tüm Durumlar</option>
+            <option>Bekliyor</option>
+            <option>Hazırlanıyor</option>
+            <option>Sevk Edildi</option>
+            <option>Tamamlandı</option>
+            <option>İptal</option>
+          </select>
         </div>
         <div id="table-wrap"></div>
       </div>
-
     </div>
   </div>
 </div>
@@ -299,8 +290,6 @@
           <textarea id="f-not" placeholder="Sevkiyat hakkında notlar..."></textarea>
         </div>
       </div>
-
-      <!-- ÇEKİ LİSTESİ -->
       <div class="ceki-section">
         <div class="ceki-title">
           Çeki Listesi
@@ -308,13 +297,7 @@
         </div>
         <table class="ceki-table">
           <thead>
-            <tr>
-              <th style="width:36px">✓</th>
-              <th>Malzeme Adı</th>
-              <th style="width:80px">Miktar</th>
-              <th style="width:70px">Birim</th>
-              <th style="width:32px"></th>
-            </tr>
+            <tr><th style="width:36px">✓</th><th>Malzeme Adı</th><th style="width:80px">Miktar</th><th style="width:70px">Birim</th><th style="width:32px"></th></tr>
           </thead>
           <tbody id="ceki-tbody"></tbody>
         </table>
@@ -350,42 +333,52 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ── VERİ ──────────────────────────────────────────────────────────
-let data = JSON.parse(localStorage.getItem('enorpa_sevk') || '[]');
+const API_URL = "https://script.google.com/a/macros/enorpa.com/s/AKfycbxDtjboFxLV7io0DfXKu3rBd_SJqCT23xYRxlU745JQKuYawadoitDJGx6ZCUv81vw/exec";
+
+let data = [];
 let currentPage = 'sevkiyatlar';
 let currentDetail = null;
 let editingId = null;
-let idCounter = data.length ? Math.max(...data.map(d=>d.id)) + 1 : 1;
 
-const SAMPLE = [
-  { id: 1, proje: 'Isı Merkezi Projesi', musteri: 'Konya OSB', sorumlu: 'Ayşe Hanım', tarih: '2026-05-08', durum: 'Hazırlanıyor', tasima: 'Araç', not: 'Öncelikli sevkiyat.', ceki: [
-    { malzeme: 'Kazan Gövdesi 500kW', miktar: 1, birim: 'Adet', tamam: true },
-    { malzeme: 'Boru Tesisatı Seti', miktar: 3, birim: 'Takım', tamam: false },
-    { malzeme: 'Kontrol Panosu', miktar: 1, birim: 'Adet', tamam: false },
-  ]},
-  { id: 2, proje: 'Sera Isıtma Sistemi', musteri: 'Antalya Tarım AŞ', sorumlu: 'Alper Bey', tarih: '2026-05-12', durum: 'Bekliyor', tasima: 'Kargo', not: '', ceki: [
-    { malzeme: 'Fan Coil Ünitesi', miktar: 8, birim: 'Adet', tamam: false },
-    { malzeme: 'Pompa Grubu', miktar: 2, birim: 'Adet', tamam: false },
-  ]},
-  { id: 3, proje: 'Fabrika Isıtma Modernizasyonu', musteri: 'Bursa Tekstil', sorumlu: 'Nurhayat Hanım', tarih: '2026-04-28', durum: 'Tamamlandı', tasima: 'Araç', not: 'Zamanında teslim edildi.', ceki: [
-    { malzeme: 'Sıcak Su Kazanı 1000kW', miktar: 2, birim: 'Adet', tamam: true },
-    { malzeme: 'Genleşme Tankı', miktar: 1, birim: 'Adet', tamam: true },
-    { malzeme: 'Bağlantı Elemanları', miktar: 1, birim: 'Set', tamam: true },
-  ]},
-  { id: 4, proje: 'Hastane Isı Merkezi', musteri: 'Isparta İl Sağlık', sorumlu: 'Quadri Bey', tarih: '2026-05-06', durum: 'Sevk Edildi', tasima: 'Araç', not: 'Teslim teyidi bekleniyor.', ceki: [
-    { malzeme: 'Yoğuşmalı Kazan 800kW', miktar: 1, birim: 'Adet', tamam: true },
-    { malzeme: 'Boyler 2000L', miktar: 1, birim: 'Adet', tamam: true },
-  ]},
-];
-
-if (!data.length) { data = SAMPLE; save(); }
-
-function save() { localStorage.setItem('enorpa_sevk', JSON.stringify(data)); }
-
-// ── DURUM BADGE ───────────────────────────────────────────────────
-function badgeClass(d) {
-  return {Bekliyor:'badge-blue',Hazırlanıyor:'badge-amber','Sevk Edildi':'badge-orange',Tamamlandı:'badge-green',İptal:'badge-gray'}[d]||'badge-gray';
+function showLoading(on) {
+  document.getElementById('loading-bar').style.display = on ? 'block' : 'none';
 }
+
+async function apiCall(action, payload) {
+  try {
+    if (action === "getAll") {
+      const res = await fetch(API_URL + "?action=getAll");
+      const json = await res.json();
+      return json.data || [];
+    } else {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({ action, ...payload })
+      });
+      return await res.json();
+    }
+  } catch(e) {
+    toast("Sheets bağlantı hatası: " + e.message);
+    return null;
+  }
+}
+
+async function loadData() {
+  showLoading(true);
+  toast("Veriler yükleniyor...");
+  const rows = await apiCall("getAll");
+  if (rows) {
+    data = rows.map(r => ({
+      ...r,
+      ceki: Array.isArray(r.ceki) ? r.ceki : []
+    }));
+  }
+  showLoading(false);
+  renderStats();
+  renderTable();
+  toast("Veriler güncellendi.");
+}
+
 function statusStyle(d) {
   if(d==='Tamamlandı') return 'badge badge-green';
   if(d==='Bekliyor') return 'badge badge-blue';
@@ -394,7 +387,6 @@ function statusStyle(d) {
   return 'badge badge-gray';
 }
 
-// ── STATS ─────────────────────────────────────────────────────────
 function renderStats() {
   const toplam = data.length;
   const bekleyen = data.filter(d=>d.durum==='Bekliyor'||d.durum==='Hazırlanıyor').length;
@@ -410,7 +402,6 @@ function renderStats() {
   document.getElementById('badge-bekleyen').textContent = bekleyen;
 }
 
-// ── TABLO ─────────────────────────────────────────────────────────
 function getFiltered() {
   const q = document.getElementById('search-input').value.toLowerCase();
   const ds = document.getElementById('filter-durum').value;
@@ -433,12 +424,14 @@ function renderTable() {
     <th>Sevkiyat No</th><th>Proje</th><th>Müşteri</th><th>Sorumlu</th><th>Sevk Tarihi</th><th>Çeki</th><th>Durum</th><th></th>
   </tr></thead><tbody>`;
   rows.forEach(r => {
-    const tamam = r.ceki.filter(c=>c.tamam).length;
-    const top = r.ceki.length;
+    const ceki = Array.isArray(r.ceki) ? r.ceki : [];
+    const tamam = ceki.filter(c=>c.tamam).length;
+    const top = ceki.length;
     const pct = top ? Math.round(tamam/top*100) : 0;
     const tarih = r.tarih ? new Date(r.tarih).toLocaleDateString('tr-TR') : '—';
-    html += `<tr onclick="openDetail(${r.id})">
-      <td><span class="mono">SEV-${String(r.id).padStart(3,'0')}</span></td>
+    const rid = String(r.id).replace(/'/g,"");
+    html += `<tr onclick="openDetail('${rid}')">
+      <td><span class="mono">SEV-${String(r.id).slice(-4).padStart(4,'0')}</span></td>
       <td style="font-weight:500">${r.proje}</td>
       <td>${r.musteri}</td>
       <td>${r.sorumlu||'—'}</td>
@@ -449,7 +442,7 @@ function renderTable() {
       </td>
       <td><span class="${statusStyle(r.durum)}">${r.durum}</span></td>
       <td onclick="event.stopPropagation()">
-        <select class="status-select" onchange="quickStatus(${r.id}, this.value)" onclick="event.stopPropagation()">
+        <select class="status-select" onchange="quickStatus('${rid}', this.value)" onclick="event.stopPropagation()">
           <option value="">Durum Güncelle</option>
           <option>Bekliyor</option><option>Hazırlanıyor</option><option>Sevk Edildi</option><option>Tamamlandı</option><option>İptal</option>
         </select>
@@ -460,18 +453,24 @@ function renderTable() {
   document.getElementById('table-wrap').innerHTML = html;
 }
 
-function quickStatus(id, val) {
+async function quickStatus(id, val) {
   if(!val) return;
-  const r = data.find(d=>d.id===id);
-  if(r) { r.durum = val; save(); renderStats(); renderTable(); toast('Durum güncellendi: '+val); }
+  const r = data.find(d=>String(d.id)===String(id));
+  if(r) {
+    r.durum = val;
+    renderStats(); renderTable();
+    showLoading(true);
+    await apiCall("save", { item: r });
+    showLoading(false);
+    toast('Durum güncellendi: '+val);
+  }
 }
 
-// ── DETAY ─────────────────────────────────────────────────────────
 function openDetail(id) {
-  const r = data.find(d=>d.id===id);
+  const r = data.find(d=>String(d.id)===String(id));
   if(!r) return;
   currentDetail = id;
-  document.getElementById('d-id').textContent = 'SEV-'+String(r.id).padStart(3,'0');
+  document.getElementById('d-id').textContent = 'SEV-'+String(r.id).slice(-4).padStart(4,'0');
   document.getElementById('d-name').textContent = r.proje;
   const tarih = r.tarih ? new Date(r.tarih).toLocaleDateString('tr-TR') : '—';
   document.getElementById('d-info').innerHTML = `
@@ -482,12 +481,13 @@ function openDetail(id) {
     <div class="detail-row"><span class="detail-key">Durum</span><span class="detail-val"><span class="${statusStyle(r.durum)}">${r.durum}</span></span></div>
     ${r.not ? `<div class="detail-row"><span class="detail-key">Not</span><span class="detail-val" style="font-size:12px;color:var(--gray)">${r.not}</span></div>` : ''}
   `;
-  const tamam = r.ceki.filter(c=>c.tamam).length;
-  let cekiHtml = `<div class="ceki-title">Çeki Listesi <span style="font-weight:400;color:var(--gray)">${tamam}/${r.ceki.length}</span></div>`;
-  if(r.ceki.length) {
-    r.ceki.forEach((c,i) => {
+  const ceki = Array.isArray(r.ceki) ? r.ceki : [];
+  const tamam = ceki.filter(c=>c.tamam).length;
+  let cekiHtml = `<div class="ceki-title">Çeki Listesi <span style="font-weight:400;color:var(--gray)">${tamam}/${ceki.length}</span></div>`;
+  if(ceki.length) {
+    ceki.forEach((c,i) => {
       cekiHtml += `<div class="ceki-item">
-        <div class="ceki-check${c.tamam?' checked':''}" onclick="toggleCeki(${r.id},${i})" style="cursor:pointer"></div>
+        <div class="ceki-check${c.tamam?' checked':''}" onclick="toggleCeki('${id}',${i})" style="cursor:pointer"></div>
         <span class="ceki-name" style="${c.tamam?'text-decoration:line-through;color:var(--gray)':''}">${c.malzeme}</span>
         <span class="ceki-qty">${c.miktar} ${c.birim}</span>
       </div>`;
@@ -497,11 +497,14 @@ function openDetail(id) {
   document.getElementById('detail-overlay').classList.add('open');
 }
 
-function toggleCeki(rid, idx) {
-  const r = data.find(d=>d.id===rid);
+async function toggleCeki(id, idx) {
+  const r = data.find(d=>String(d.id)===String(id));
   if(!r) return;
   r.ceki[idx].tamam = !r.ceki[idx].tamam;
-  save(); renderTable(); openDetail(rid);
+  renderTable(); openDetail(id);
+  showLoading(true);
+  await apiCall("save", { item: r });
+  showLoading(false);
 }
 
 function closeDetail() {
@@ -515,7 +518,6 @@ function editCurrent() {
   openEdit(currentDetail);
 }
 
-// ── MODAL ─────────────────────────────────────────────────────────
 let cekiRows = [];
 
 function openNew() {
@@ -532,7 +534,7 @@ function openNew() {
 }
 
 function openEdit(id) {
-  const r = data.find(d=>d.id===id);
+  const r = data.find(d=>String(d.id)===String(id));
   if(!r) return;
   editingId = id;
   document.getElementById('modal-title-text').textContent = 'Sevkiyat Düzenle';
@@ -543,7 +545,7 @@ function openEdit(id) {
   document.getElementById('f-tasima').value = r.tasima||'';
   document.getElementById('f-tarih').value = r.tarih||'';
   document.getElementById('f-not').value = r.not||'';
-  cekiRows = r.ceki.map(c=>({...c}));
+  cekiRows = (r.ceki||[]).map(c=>({...c}));
   renderCekiBody();
   document.getElementById('modal-new').classList.add('open');
 }
@@ -571,12 +573,12 @@ function renderCekiBody() {
   </tr>`).join('');
 }
 
-function saveSevkiyat() {
+async function saveSevkiyat() {
   const proje = document.getElementById('f-proje').value.trim();
   const musteri = document.getElementById('f-musteri').value.trim();
   if(!proje || !musteri) { toast('Proje adı ve müşteri zorunludur!'); return; }
   const obj = {
-    id: editingId || idCounter++,
+    id: editingId || Date.now(),
     proje, musteri,
     sorumlu: document.getElementById('f-sorumlu').value,
     durum: document.getElementById('f-durum').value,
@@ -585,13 +587,15 @@ function saveSevkiyat() {
     not: document.getElementById('f-not').value,
     ceki: cekiRows.map(c=>({...c}))
   };
-  if(editingId) { const idx=data.findIndex(d=>d.id===editingId); data[idx]=obj; }
+  if(editingId) { const idx=data.findIndex(d=>String(d.id)===String(editingId)); data[idx]=obj; }
   else data.unshift(obj);
-  save(); closeModal(); renderStats(); renderTable();
+  closeModal(); renderStats(); renderTable();
+  showLoading(true);
+  await apiCall("save", { item: obj });
+  showLoading(false);
   toast(editingId ? 'Sevkiyat güncellendi.' : 'Yeni sevkiyat eklendi.');
 }
 
-// ── NAVİGASYON ────────────────────────────────────────────────────
 function setPage(page, el) {
   currentPage = page;
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -604,12 +608,8 @@ function setPage(page, el) {
 
 function renderOzet() {
   const sorumluMap = {};
-  data.forEach(d => {
-    const s = d.sorumlu||'Atanmamış';
-    sorumluMap[s] = (sorumluMap[s]||0)+1;
-  });
-  let html = '<div style="padding:20px">';
-  html += '<div style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--mid)">Kişi Bazlı Sevkiyat Sayısı</div>';
+  data.forEach(d => { const s = d.sorumlu||'Atanmamış'; sorumluMap[s] = (sorumluMap[s]||0)+1; });
+  let html = '<div style="padding:20px"><div style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--mid)">Kişi Bazlı Sevkiyat Sayısı</div>';
   Object.entries(sorumluMap).forEach(([k,v]) => {
     const pct = Math.round(v/data.length*100);
     html += `<div style="margin-bottom:10px">
@@ -621,16 +621,13 @@ function renderOzet() {
   document.getElementById('table-wrap').innerHTML = html;
 }
 
-// ── TOAST ─────────────────────────────────────────────────────────
 function toast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 2500);
 }
 
-// ── BAŞLAT ────────────────────────────────────────────────────────
-renderStats();
-renderTable();
+loadData();
 </script>
 </body>
 </html>
